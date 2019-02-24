@@ -12,7 +12,9 @@ public class SharePref {
     private static final String PLACE_OBJ = "place_obj";
 
     private static final String DOWNLOAD_URL = "download_url";
+    private static final String FILE_NAME = "file_name";
     private static final String TIME_REPEATING = "time_repeating";
+    private static final String TIMER_FLAG = "timer_is_sets";
 
     private SharePref() {} //prevent creating multiple instances by making the constructor private
 
@@ -25,22 +27,23 @@ public class SharePref {
         return sharePref;
     }
 
-    public void savePlaceObj(String placeObjStr) {
-        editor.putString(PLACE_OBJ, placeObjStr);
-        editor.commit();
-    }
-
-    public String getPlaceObj() {
-        return sharedPreferences.getString(PLACE_OBJ, "");
-    }
-
-    public void setDownloadUrl(String downloadUrl) {
+    public void saveDownloadUrl(String downloadUrl) {
         editor.putString(DOWNLOAD_URL, downloadUrl);
         editor.commit();
     }
 
-    public void setTimeRepeating(String timeRepeating) {
+    public void saveFileName(String filename) {
+        editor.putString(FILE_NAME, filename);
+        editor.commit();
+    }
+
+    public void saveTimeRepeating(String timeRepeating) {
         editor.putString(TIME_REPEATING, timeRepeating);
+        editor.commit();
+    }
+
+    public void setTimer(Boolean timer) {
+        editor.putBoolean(TIMER_FLAG, timer);
         editor.commit();
     }
 
@@ -48,14 +51,15 @@ public class SharePref {
         return sharedPreferences.getString(DOWNLOAD_URL, "");
     }
 
-    public void removePlaceObj() {
-        editor.remove(PLACE_OBJ);
-        editor.commit();
+    public String getFileName() {
+        return sharedPreferences.getString(FILE_NAME, "");
     }
 
-    public void clearAll() {
-        editor.clear();
-        editor.commit();
+    public String getTimeRepeating() {
+        return sharedPreferences.getString(TIME_REPEATING, "");
     }
 
+    public boolean isitWorks() {
+        return sharedPreferences.getBoolean(TIMER_FLAG,false);
+    }
 }
