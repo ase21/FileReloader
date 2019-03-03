@@ -28,39 +28,12 @@ import retrofit2.Retrofit;
 
 public class DownloadBrodcastReceiver extends BroadcastReceiver {
 
-    public static final String NOTIFICATION_CHANNEL_ID = "10001";
     @Override
     public void onReceive(final Context context, Intent intent) {
-//        //Get notification manager to manage/send notifications
-//
-//        //Intent to invoke app when click on notification.
-//        //In this sample, we want to start/launch this sample app when user clicks on notification
-//        Intent intentToRepeat = new Intent(context, MainActivity.class);
-//        //set flag to restart/relaunch the app
-//        intentToRepeat.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//
-//        //Pending intent to handle launch of Activity in intent above
-//        PendingIntent pendingIntent =
-//                PendingIntent.getActivity(context, 100, intentToRepeat, PendingIntent.FLAG_UPDATE_CURRENT);
-//
-//        NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-//                .setContentIntent(pendingIntent)
-//                .setSmallIcon(R.mipmap.ic_launcher)
-//                .setContentTitle(SharePref.getInstance(context).getDownloadUrl())
-//                .setContentText("Пришло время подать показания счетчиков!")
-//                .setAutoCancel(true);
-//
-//        NotificationManager notificationManager =
-//                (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
-//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-//            int importance = NotificationManager.IMPORTANCE_HIGH;
-//            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "NOTIFICATION_CHANNEL_NAME", importance);
-//            assert notificationManager != null;
-//            builder.setChannelId(NOTIFICATION_CHANNEL_ID);
-//            notificationManager.createNotificationChannel(notificationChannel);
-//        }
-//
-//        notificationManager.notify(100, builder.build());
+       downloadFile(context);
+    }
+
+    public static void downloadFile(final Context context) {
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl("http://google.com/");
 
@@ -90,9 +63,9 @@ public class DownloadBrodcastReceiver extends BroadcastReceiver {
             }
         });
 
-        Log.d("ase21", "выполнилось уведосление");
-
+        Log.d("mazafaka", "выполнилось уведосление");
     }
+
     public static void SetAlarm(Context context, int hour){
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.HOUR_OF_DAY, hour);
@@ -108,7 +81,7 @@ public class DownloadBrodcastReceiver extends BroadcastReceiver {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 
         alarmManager.setRepeating(AlarmManager.RTC, intervalInMillis, AlarmManager.INTERVAL_HALF_DAY , pendingIntent);
-        Log.d("ase21", "установлен аларм");
+        Log.d("mazafaka", "установлен аларм");
     }
 
     public static void CancelAlarm(Context context){
@@ -116,10 +89,10 @@ public class DownloadBrodcastReceiver extends BroadcastReceiver {
         Intent intent = new Intent(context, DownloadBrodcastReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
         alarmManager.cancel(pendingIntent);
-        Log.d("ase21", "снят аларм");
+        Log.d("mazafaka", "снят аларм");
     }
 
-    private boolean writeResponseBodyToDisk(Context context, ResponseBody body) {
+    private static boolean writeResponseBodyToDisk(Context context, ResponseBody body) {
         try {
             // todo change the file location/name according to your needs
             File futureStudioIconFile = new File(Environment
@@ -154,7 +127,7 @@ public class DownloadBrodcastReceiver extends BroadcastReceiver {
                     outputStream.write(fileReader, 0, read);
 
                     fileSizeDownloaded += read;
-                    Log.d("ase21", "file download: " + fileSizeDownloaded + " of " + fileSize);
+                    Log.d("mazafaka", "file download: " + fileSizeDownloaded + " of " + fileSize);
                 }
 
                 outputStream.flush();
