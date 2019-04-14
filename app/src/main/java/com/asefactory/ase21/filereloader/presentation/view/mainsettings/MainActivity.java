@@ -1,16 +1,21 @@
-package com.asefactory.ase21.filereloader;
+package com.asefactory.ase21.filereloader.presentation.view.mainsettings;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.asefactory.ase21.filereloader.broadcastreceiver.DownloadBrodcastReceiver;
-import com.asefactory.ase21.filereloader.shared_prefs.SharePref;
+import com.asefactory.ase21.filereloader.R;
+import com.asefactory.ase21.filereloader.di.App;
+import com.asefactory.ase21.filereloader.presentation.view.downloadreceiver.DownloadBrodcastReceiver;
+import com.asefactory.ase21.filereloader.data.shared_prefs.SharePref;
+
+import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -20,11 +25,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button saveUrlButton;
     Button setRepeatDownloadButton;
 
+    @Inject
+    Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initUI();
+        App.getComponent().inject(this);
     }
 
     private void initUI() {

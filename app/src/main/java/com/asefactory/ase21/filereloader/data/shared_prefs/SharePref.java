@@ -1,4 +1,4 @@
-package com.asefactory.ase21.filereloader.shared_prefs;
+package com.asefactory.ase21.filereloader.data.shared_prefs;
 
 import android.app.Activity;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.asefactory.ase21.filereloader.broadcastreceiver;
+package com.asefactory.ase21.filereloader.presentation.view.bootreceiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -6,7 +6,8 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.asefactory.ase21.filereloader.shared_prefs.SharePref;
+import com.asefactory.ase21.filereloader.presentation.view.downloadreceiver.DownloadBrodcastReceiver;
+import com.asefactory.ase21.filereloader.data.shared_prefs.SharePref;
 
 public class BootReceiver extends BroadcastReceiver {
     @Override

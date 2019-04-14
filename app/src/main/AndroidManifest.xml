@@ -18,16 +18,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity">
+        <activity android:name=".presentation.view.mainsettings.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".broadcastreceiver.DownloadBrodcastReceiver" />
+        <receiver android:name=".presentation.view.downloadreceiver.DownloadBrodcastReceiver" />
         <receiver
-            android:name=".broadcastreceiver.BootReceiver"
+            android:name=".presentation.view.bootreceiver.BootReceiver"
             android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

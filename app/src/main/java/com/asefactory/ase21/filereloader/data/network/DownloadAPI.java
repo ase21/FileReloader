@@ -1,4 +1,4 @@
-package com.asefactory.ase21.filereloader.network;
+package com.asefactory.ase21.filereloader.data.network;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

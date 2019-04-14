@@ -1,4 +1,4 @@
-package com.asefactory.ase21.filereloader.broadcastreceiver;
+package com.asefactory.ase21.filereloader.presentation.view.downloadreceiver;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -9,8 +9,8 @@ import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.asefactory.ase21.filereloader.network.DownloadAPI;
-import com.asefactory.ase21.filereloader.shared_prefs.SharePref;
+import com.asefactory.ase21.filereloader.data.network.DownloadAPI;
+import com.asefactory.ase21.filereloader.data.shared_prefs.SharePref;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -19,7 +19,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Calendar;
 
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
