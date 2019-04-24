@@ -16,7 +16,7 @@ public class SharePref {
     private static final String TIME_REPEATING = "time_repeating";
     private static final String TIMER_FLAG = "timer_is_sets";
 
-    private SharePref() {} //prevent creating multiple instances by making the constructor private
+    public SharePref() {} //prevent creating multiple instances by making the constructor private
 
     //The context passed into the getInstance should be application level context.
     public static SharePref getInstance(Context context) {

@@ -14,10 +14,11 @@ import com.asefactory.ase21.filereloader.R;
 import com.asefactory.ase21.filereloader.di.App;
 import com.asefactory.ase21.filereloader.presentation.view.downloadreceiver.DownloadBrodcastReceiver;
 import com.asefactory.ase21.filereloader.data.shared_prefs.SharePref;
+import com.asefactory.ase21.filereloader.presentation.view.mainsettings.models.SavedInformationUIModel;
 
 import javax.inject.Inject;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements MainView, View.OnClickListener {
 
     EditText downloadUrlEditText;
     EditText getTimeRepeatingEditText;
@@ -51,16 +52,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initUX() {
-        if (!SharePref.getInstance(this).getDownloadUrl().equals("")){
-            downloadUrlEditText.setText(SharePref.getInstance(this).getDownloadUrl());
-        }
-        if (!SharePref.getInstance(this).getFileName().equals("")){
-            filenameEditText.setText(SharePref.getInstance(this).getFileName());
-        }
-        if (!SharePref.getInstance(this).getTimeRepeating().equals("")){
-            getTimeRepeatingEditText.setText(SharePref.getInstance(this).getTimeRepeating());
-        }
-        setButtonText();
+        SavedInformationUIModel informationModel = new SavedInformationUIModel();
+        informationModel.setDownloadURL(SharePref.getInstance(this).getDownloadUrl());
+        informationModel.setFilename(SharePref.getInstance(this).getFileName());
+        informationModel.setTimerValue(SharePref.getInstance(this).getTimeRepeating());
+        informationModel.setSetTimer(SharePref.getInstance(this).isitWorks());
+        showSavedInformation(informationModel);
         saveUrlButton.setOnClickListener(this);
         setRepeatDownloadButton.setOnClickListener(this);
     }
@@ -89,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     cancelTimer();
                 }
-                setButtonText();
+                setButtonText(SharePref.getInstance(this).isitWorks());
                 break;
             }
             default:{
@@ -117,8 +114,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cancelAlarmManager();
     }
 
-    private void setButtonText() {
-        if (SharePref.getInstance(this).isitWorks()){
+    private void setButtonText(boolean isSet) {
+        if (isSet){
             setRepeatDownloadButton.setText("Cancel Timer");
         } else {
             setRepeatDownloadButton.setText("Set Timer");
@@ -133,4 +130,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         DownloadBrodcastReceiver.CancelAlarm(this);
     }
 
+    @Override
+    public void showSavedInformation(SavedInformationUIModel informationModel) {
+        if (!informationModel.getDownloadURL().equals("")){
+            downloadUrlEditText.setText(informationModel.getDownloadURL());
+        }
+        if (!informationModel.getFileName().equals("")){
+            filenameEditText.setText(SharePref.getInstance(this).getFileName());
+        }
+        if (!informationModel.getTimerValue().equals("")){
+            getTimeRepeatingEditText.setText(SharePref.getInstance(this).getTimeRepeating());
+        }
+        setButtonText(informationModel.isSetTimer());
+    }
 }
