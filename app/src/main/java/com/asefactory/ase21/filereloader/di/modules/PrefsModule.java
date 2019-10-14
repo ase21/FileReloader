@@ -15,6 +15,6 @@ public class PrefsModule {
     @Singleton
     @Provides
     SharePref provideSharePref(Context context){
-        return new SharePref();
+        return new SharePref(context);
     }
 }

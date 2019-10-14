@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class SharePref {
-    private static SharePref sharePref = new SharePref();
     private static SharedPreferences sharedPreferences;
     private static SharedPreferences.Editor editor;
 
@@ -16,16 +15,9 @@ public class SharePref {
     private static final String TIME_REPEATING = "time_repeating";
     private static final String TIMER_FLAG = "timer_is_sets";
 
-    public SharePref() {} //prevent creating multiple instances by making the constructor private
-
-    //The context passed into the getInstance should be application level context.
-    public static SharePref getInstance(Context context) {
-        if (sharedPreferences == null) {
-            sharedPreferences = context.getSharedPreferences(context.getPackageName(), Activity.MODE_PRIVATE);
-            editor = sharedPreferences.edit();
-        }
-        return sharePref;
-    }
+    public SharePref(Context context) {
+        sharedPreferences = context.getSharedPreferences(context.getPackageName(), Activity.MODE_PRIVATE);
+    } //prevent creating multiple instances by making the constructor private
 
     public void saveDownloadUrl(String downloadUrl) {
         editor.putString(DOWNLOAD_URL, downloadUrl);

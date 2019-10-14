@@ -4,7 +4,6 @@ import android.app.Application;
 
 import com.asefactory.ase21.filereloader.di.components.AppComponent;
 import com.asefactory.ase21.filereloader.di.components.DaggerAppComponent;
-import com.asefactory.ase21.filereloader.di.modules.AppModule;
 
 public class App extends Application {
 
@@ -18,7 +17,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         appComponent = DaggerAppComponent.builder()
-                .appModule(new AppModule(this))
+                .context(this)
                 .build();
     }
 }
